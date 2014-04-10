@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href={{ static_url("css/bootstrap.min.css") }} />
+    <link rel="stylesheet" href={{ static_url("css/style.css") }} />
+    <link rel="shortcut icon" href={{ static_url("img/favicon.ico") }} />
+    <title>HostAdmin</title>
+    {% block header %}{% end %}
+  </head>
+  <body>
+    <div class="container">
+      {% block container %}{% end %}
+    </div>
+  </body>
+</html>
+<script type="text/javascript" src="{{ static_url("js/jquery.js") }}"></script>
+<script type="text/javascript" src="{{ static_url("js/bootstrap.min.js") }}"></script>
+{% block js %}{% end %}

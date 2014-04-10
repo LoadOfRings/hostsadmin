@@ -1,0 +1,93 @@
+.cf:after {
+    content:"."; 
+    display:block;
+    height:0; 
+    visibility:hidden;
+    clear:both;
+}
+.container {
+    width:1000px;
+}
+.header {
+    border-bottom:1px solid #999;
+}
+.header h1 {
+    float:left;
+}
+.header p {
+    float:left;
+    padding-top:38px;
+    padding-left:50px;
+}
+.header .btn {
+    float:left;
+    margin-top:20px;
+    height:39px;
+    float:right;
+    font-size:20px;
+}
+.file-name {
+}
+.content .textarea {
+    width:700px;
+    float:left;
+    border-radius:4px;
+    min-height:300px;
+    animation: succes 2s linear 0s 1 alternate;
+    -moz-animation: success 2s linear 0s 1 alternate;
+    -o-animation: success 2s linear 0s 1 alternate;
+    -webkit-animation: success 2s linear 0s infinite alternate;
+    animation-play-state:paused;
+    -webkit-animation-play-state:paused;
+    border:1px solid gray;
+}
+.content textarea {
+    resize: none;
+}
+.node-list {
+    float:left;
+    width:160px;
+    margin-left:110px;
+    min-height:300px;
+    border:1px solid gray;
+    text-align:center;
+    border-radius:4px;
+}
+.node-list li {
+    list-style:none;
+}
+
+@keyframes success
+{
+0%   {background: white;}
+50%  {background: #5cb85c;}
+100%  {background: white;}
+}
+
+@-moz-keyframes success /* Firefox */
+{
+0%   {background: white;}
+50%  {background: #5cb85c;}
+100%  {background: white;}
+}
+
+@-webkit-keyframes success /* Safari 和 Chrome */
+{
+0%   {background: white;}
+50%  {background: #5cb85c;}
+100%  {background: white;}
+}
+
+@-o-keyframes success /* Opera */
+{
+0%   {background: white;}
+50%  {background: #5cb85c;}
+100%  {background: white;}
+}
+.muted {
+    color:#999;
+}
+.transition {
+    transition: opacity 1s;
+    -webkit-transition: opacity 1s;
+}

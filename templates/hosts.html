@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block header %}
+<script type="text/javascript" src="{{ static_url("plugin/codemirror/lib/codemirror.js") }}"></script>
+<link rel="stylesheet" href="{{ static_url("plugin/codemirror/lib/codemirror.css") }}" />
+<script type="text/javascript" src="{{ static_url("plugin/codemirror/mode/markdown/markdown.js") }}"></script>
+<script type="text/javascript" src="{{ static_url("plugin/codemirror/keymap/vim.js") }}"></script>
+
+
+{% end %}
+{% block container %}
+  <div class="header cf">
+      <h1>Editing on {{ip_address}}</h1>
+      <p>
+        developed by 
+        <a target="_blank" href="http://weibo.com/u/1052544000/home?wvr=5">@展夜枭</a>
+      </p>
+      <button class="btn btn-primary" disabled>Save</button>
+  </div>
+  <div class="alert alert-danger transition" style="opacity:0;height:50px;margin-top:20px"></div>
+  <div class="muted file-name"><h3>{{ file_name }}:</h3></div>
+  <div class="content">
+      <div class="textarea">
+        <textarea id="" name="" rows="10" cols="30">{{ text }}</textarea>
+      </div>
+      <div class="node-list">
+        <div>All alive nodes ({{ nodes_len }})</div>
+        {% for node in nodes %}
+        <li>
+        <a target="_blank" href='http://{{ node["ip"] }}:{{ node["port"] }}/'>{{ node["ip"] }}:{{ node["port"] }}</a>
+        </li>
+        {% end %}
+      </div>
+  </div>
+{% end %}
+{% block js %}
+<script type="text/javascript">
+    var ip = "{{ ip_address }}",
+        port = "{{ port }}";
+</script>
+<script type="text/javascript" src="{{ static_url("js/index.js") }}"></script>
+{% end %}
