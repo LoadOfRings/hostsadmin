@@ -33,9 +33,9 @@
     float:left;
     border-radius:4px;
     min-height:300px;
-    animation: succes 2s linear 0s 1 alternate;
-    -moz-animation: success 2s linear 0s 1 alternate;
-    -o-animation: success 2s linear 0s 1 alternate;
+    animation: succes 2s linear 0s infinite alternate;
+    -moz-animation: success 2s linear 0s infinite alternate;
+    -o-animation: success 2s linear 0s infinite alternate;
     -webkit-animation: success 2s linear 0s infinite alternate;
     animation-play-state:paused;
     -webkit-animation-play-state:paused;
