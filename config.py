@@ -1,14 +1,20 @@
 import os
 import socket
+import fcntl
+import struct
 import redis
 
-def get_ip():
-    localIP = socket.gethostbyname(socket.gethostname())
-    ipList = socket.gethostbyname_ex(socket.gethostname())
-    for i in ipList:
-        if i != localIP and type(i) is type([]) and len(i):
-            return "".join(i)
-    return localIP
+def get_ip(ifname):
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        return socket.inet_ntoa(fcntl.ioctl( s.fileno(), 0x8915, struct.pack('256s',ifname[:15]))[20:24])
+    except:
+        localIP = socket.gethostbyname(socket.gethostname())
+        ipList = socket.gethostbyname_ex(socket.gethostname())
+        for i in ipList:
+            if i != localIP and type(i) is type([]) and len(i):
+                return "".join(i)
+        return localIP
 
 app_settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "static"),
@@ -17,7 +23,7 @@ app_settings = {
     "debug":True
 }
 server_config = {
-    "ip": get_ip(),
+    "ip": get_ip("eth0"),
     "port": 8000
 }
 redis_config = {
