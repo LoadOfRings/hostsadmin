@@ -50,9 +50,15 @@ function onSuccess(msg) {
     if (msg.code == 0) {
         setTimeout(function(){
             document.querySelector(".textarea").style["-webkit-animation-play-state"] = "running";
+            document.querySelector(".textarea").style["-o-animation-play-state"] = "running";
+            document.querySelector(".textarea").style["-moz-animation-play-state"] = "running";
+            document.querySelector(".textarea").style["animation-play-state"] = "running";
         }, 0);
         setTimeout(function(){
             document.querySelector(".textarea").style["-webkit-animation-play-state"] = "paused";
+            document.querySelector(".textarea").style["-o-animation-play-state"] = "paused";
+            document.querySelector(".textarea").style["-moz-animation-play-state"] = "paused";
+            document.querySelector(".textarea").style["animation-play-state"] = "paused";
         }, 2000);
     }
 }
