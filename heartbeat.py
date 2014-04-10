@@ -10,7 +10,7 @@ for _node in redis_client.smembers("nodes"):
     try:
         content = urllib2.urlopen(url).read()
         if content != "don't shoot!your friend!":
-            redis_client.srem(_node, "nodes")
+            redis_client.srem("nodes", _node)
     except:
         redis_client.srem("nodes", _node)
 
