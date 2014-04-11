@@ -24,22 +24,17 @@ $(document).ready(function(){
     $(".CodeMirror").bind("change", function(){
         $(".btn").removeAttr("disabled");
     })
-    /*
-    document.querySelector("textarea").oninput = function(){
-        $(".btn").removeAttr("disabled");
-    }*/
+
     window.ws = new WebSocket("ws://" + ip + ":" + port + "/soc");
     setTimeout(function(){
-        console.log(ws.readyState);
         if (ws.readyState == 3) {
             $(".alert").text("warning: Websocket connection failed! You can not be received a notice while file was modified! Ensure if you are online and not using a proxy.").css("opacity", 1);
         }
     }, 1000);
+
     ws.onmessage = function(event){
         var data = JSON.parse(event.data);
-        console.log(data);
         if (data._flag != getCookie("_flag") && true == confirm("hosts已被" + data.user + "修改，是否重新加载")) {
-
             editor.setValue(data.text);
         }
     }

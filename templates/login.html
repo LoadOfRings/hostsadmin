@@ -3,24 +3,9 @@
     <link rel="stylesheet" href={{ static_url("css/login.css") }} />
 {% end %}
 {% block container %}
-<!--
-<form action="/login" method="POST">
-        <div class="input-prepend">
-            <span class="add-on">账&nbsp;&nbsp;号</span>
-            <input class="span3" name="name" type="text" placeholder="邮箱前缀">
-        </div>
-        <div class="input-prepend">
-            <span class="add-on">密&nbsp;&nbsp;码</span>
-            <input class="span3" name="pass" type="password" placeholder="邮箱密码">
-        </div>
-        <div class="btn-group">
-            <button type="submit" class="btn btn-success" id="login">登录</button>
-        </div>
-      </form>
--->
 <form class="form-signin" role="form" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" name="name" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input type="text" name="name" class="form-control" placeholder="Staff email prefix" required="" autofocus="">
         <input type="password" name="pass" class="form-control" placeholder="Password" required="">
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me

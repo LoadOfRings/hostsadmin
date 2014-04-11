@@ -14,11 +14,12 @@ class BaseHandler(tornado.web.RequestHandler):
         return self.get_secure_cookie("user")
 
     def write_json(self, code, message, data = ''):
-        self.write(json.JSONEncoder().encode({"code":code, "message":"message", "data":data}))
+        self.write(json.JSONEncoder().encode({"code":code, "message":message, "data":data}))
 
 class HearbeatHandler(BaseHandler):
     def get(self):
         self.write("don't shoot!your friend!")
+
 class LoginHandler(BaseHandler):
     def get(self):
         self.clear_all_cookies()
@@ -36,7 +37,6 @@ class IndexHandler(BaseHandler):
     def get(self):
         self.set_cookie("_flag", str(time.time()))
         nodes = [eval(node) for node in redis_client.smembers("nodes")]
-        print nodes
 
         self.render('templates/hosts.html', **{
             "ip_address": server_config["ip"],
@@ -58,10 +58,16 @@ class HostsHandler(BaseHandler):
                 f.write(text)
 
             user_name = tornado.escape.xhtml_escape(self.current_user)
-            SocketHandler.send_to_all(json.JSONEncoder().encode({"text":text, "user": user_name, "_flag":self.get_cookie("_flag")}))
-            self.write(json.JSONEncoder().encode({"code":0, "message":"success"}))
+            SocketHandler.send_to_all(
+                json.JSONEncoder().encode({
+                    "text":text, 
+                    "user": user_name, 
+                    "_flag":self.get_cookie("_flag")
+                })
+            )
+            self.write_json(0, "success")
         else:
-            self.write(json.JSONEncoder().encode({"code":1, "message":"not modify"}))
+            self.write_json(1, "not modify")
 
 class SocketHandler(tornado.websocket.WebSocketHandler):
     clients = set()
@@ -69,13 +75,9 @@ class SocketHandler(tornado.websocket.WebSocketHandler):
         SocketHandler.clients.add(self)
     def on_close(self):
         SocketHandler.clients.remove(self)
-        #for key in SocketHandler.clients:
-        #    if SocketHandler.clients[key] == self:
-        #        del SocketHandler.clients[key]
     @staticmethod
     def send(message, client):
         client.write_message(message)
-
     @staticmethod
     def send_to_all(message):
         for c in SocketHandler.clients:
