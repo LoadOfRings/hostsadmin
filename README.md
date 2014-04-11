@@ -14,3 +14,5 @@ HostAdmin
 # 配置参数
  1. file_name: 要编辑的文件
  2. server_config: 提供服务的地址
+ 3. redis用来存储节点列表，请自行修改为能够访问的地址。如果不希望节点被录入，去掉index.py中的发送请求即可
+ 4. valid_user是验证用户登录
